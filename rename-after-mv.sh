@@ -13,7 +13,7 @@ for file in *; do
             DOT="."
             NUM=$(echo "$file" | cut -d '.' -f 3 | cut -d '~' -f 2)
             NEW_NAME="$FILE_NAME$UNDERSCORE$NUM$DOT$EXTENSION"
-            mv "$file" $NEW_NAME
+            mv "$file" "$NEW_NAME"
             echo "$file renamed to $NEW_NAME"
         fi
     fi
