@@ -15,7 +15,7 @@ for file in *.{jpg,JPG,jpeg,png,gif}; do
     [ -f "$file" ] || break
     MIN_YEAR_MONTH=400000
 
-    if exiftool -a -G1 -s -time:all $file > /dev/null # check if the exiftool command is successful on the file
+    if exiftool -a -G1 -s -time:all "$file" > /dev/null # check if the exiftool command is successful on the file
     then
         while read -r line
         do
@@ -27,7 +27,7 @@ for file in *.{jpg,JPG,jpeg,png,gif}; do
                     MIN_YEAR_MONTH=$YEAR_MONTH
                 fi
             fi
-        done < <(exiftool -a -G1 -s -time:all $file)
+        done < <(exiftool -a -G1 -s -time:all "$file")
 
         if [ $MIN_YEAR_MONTH -ne 400000 ]
         then
@@ -36,7 +36,7 @@ for file in *.{jpg,JPG,jpeg,png,gif}; do
             MONTH=$(echo $YEAR_MONTH | cut -d ':' -f 2)
 
             [ ! -d "../Sorted/$YEAR/$MONTH" ] && mkdir -p "../Sorted/$YEAR/$MONTH"
-            mv $file ../Sorted/$YEAR/$MONTH
+            mv "$file" ../Sorted/$YEAR/$MONTH
             NUM_FILES_IN_CURR_DIR=$(expr $(ls | wc -l) - 1) # count the number of photos in the current directory minus the script itself
             echo "Moved $file, $NUM_FILES_IN_CURR_DIR files left"
         else
