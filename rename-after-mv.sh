@@ -20,3 +20,4 @@ for file in *; do
 done
 
 echo "Done!"
+exit 0
