@@ -22,7 +22,7 @@ for file in *.{jpg,JPG,jpeg,png,gif,MTS,mp4,MOV,AVI}; do
                 YEAR_MONTH=$(echo $line | cut -d ':' -f2,3 | xargs | sed 's/://')
                 NUM_SEMICOLONS_IN_LINE=$(awk -F":" '{print NF-1}' <<< "${line}")
 
-                if [ ${#YEAR_MONTH} -gt 5 ] && [[ $YEAR_MONTH =~ $DIGITS_REGEX ]] && [ $YEAR_MONTH -gt 199000 ] && [ $NUM_SEMICOLONS_IN_LINE -gt 4 ] && [[ $line != *"ProfileDateTime"* ]] && [[ $line != *"GPS"* ]]; then
+                if [ ${#YEAR_MONTH} -gt 5 ] && [[ $YEAR_MONTH =~ $DIGITS_REGEX ]] && [ $YEAR_MONTH -gt 199000 ] && [ $NUM_SEMICOLONS_IN_LINE -gt 4 ] && [[ $line != *"ProfileDateTime"* ]] && [[ $line != *"GPS"* ]] && [[ $line != *"FlashPix"* ]]; then
                     if ([ $MIN_YEAR_MONTH -eq 400000 ] || [ $YEAR_MONTH -lt $MIN_YEAR_MONTH ]) && [ $YEAR_MONTH -ne 000000 ]; then
                         MIN_YEAR_MONTH=$YEAR_MONTH
                     fi
