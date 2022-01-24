@@ -2,7 +2,7 @@
 version: "2.1"
 services:
     plex:
-        image: ghcr.io/linuxserver/plex
+        image: lscr.io/linuxserver/plex
         container_name: plex
         network_mode: host
         environment:
@@ -11,6 +11,10 @@ services:
             - VERSION=latest
         volumes:
             - /home/plex/config:/config
-            - /home/shared/Media:/data
-            - /home/plex/transcode:/transcode
+            - /disks/disk1:/disk1
+            - /disks/disk2:/disk2
+            - /disks/disk3:/disk3
+            - /disks/disk4:/disk4
+        devices:
+            - /dev/dri:/dev/dri
         restart: unless-stopped
