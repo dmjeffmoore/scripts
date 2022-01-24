@@ -1,0 +1,17 @@
+---
+version: "2.1"
+services:
+  boinc:
+    image: lscr.io/linuxserver/boinc
+    container_name: boinc
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /home/boinc/config:/config
+    ports:
+      - 8080:8080
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
