@@ -8,7 +8,7 @@
 IFS=''
 DIGITS_REGEX='^[[:digit:]]+$'
 
-NUM_FILES_IN_CURR_DIR=$(expr $(ls | wc -l) - 1) # count the number of photos in the current directory minus the script itself
+NUM_FILES_IN_CURR_DIR=$(expr $(ls -q -U | awk -F . '{print $NF}' | sort | grep -E 'jpg|JPG|jpeg|png|PNG|gif|MTS|mp4|MP4|mov|MOV|AVI|HEIC|heic}' | wc -l)) # count the number of photos and videos
 echo "Sorting $NUM_FILES_IN_CURR_DIR files..."
 
 for file in *.{jpg,JPG,jpeg,png,PNG,gif,MTS,mp4,MP4,mov,MOV,AVI,HEIC,heic}; do
@@ -37,7 +37,7 @@ for file in *.{jpg,JPG,jpeg,png,PNG,gif,MTS,mp4,MP4,mov,MOV,AVI,HEIC,heic}; do
 
                 [ ! -d "../Sorted/$YEAR/$MONTH" ] && mkdir -p "../Sorted/$YEAR/$MONTH"
                 mv "$file" ../Sorted/$YEAR/$MONTH
-                NUM_FILES_IN_CURR_DIR=$(expr $(ls | wc -l) - 1) # count the number of photos in the current directory minus the script itself
+                NUM_FILES_IN_CURR_DIR=$(expr $(ls -q -U | awk -F . '{print $NF}' | sort | grep -E 'jpg|JPG|jpeg|png|PNG|gif|MTS|mp4|MP4|mov|MOV|AVI|HEIC|heic}' | wc -l)) # count the number of photos and videos
                 echo "Moved $file, $NUM_FILES_IN_CURR_DIR files left"
             else
                 >&2 echo "Failed to get earliest date from EXIF data for $file"
