@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Dependencies: exiftool
-# Description: This script will organize all jpg, JPG, jpeg, png, gif, MTS, mp4, MOV, AVI files into folders by year then by month. Just put this script
+# Description: This script will organize all photos and videos into folders by year then by month. Just put this script
 # into the folder where all your unsorted photos are located and run it. While it is running, it will move pictures into ../Sorted
 # using the earliest date in the file's EXIF metadata.
 
@@ -11,7 +11,7 @@ DIGITS_REGEX='^[[:digit:]]+$'
 NUM_FILES_IN_CURR_DIR=$(expr $(ls | wc -l) - 1) # count the number of photos in the current directory minus the script itself
 echo "Sorting $NUM_FILES_IN_CURR_DIR files..."
 
-for file in *.{jpg,JPG,jpeg,png,gif,MTS,mp4,MOV,AVI}; do
+for file in *.{jpg,JPG,jpeg,png,PNG,gif,MTS,mp4,MP4,mov,MOV,AVI,HEIC,heic}; do
     if [ ! -d "$file" ]; then
         MIN_YEAR_MONTH=400000
 
